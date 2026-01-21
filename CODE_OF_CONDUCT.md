@@ -1,42 +1,42 @@
-# Código de Conducta del Pacto de Contribuyentes
+# Contributor Covenant Code of Conduct
 
-## Nuestro Compromiso
+## Our Pledge
 
-Nosotros, como miembros, contribuyentes y administradores, nos comprometemos a hacer de la participación en nuestra comunidad una experiencia libre de acoso para todos, independientemente de la edad, dimensión corporal, discapacidad visible o invisible, etnicidad, características sexuales, identidad y expresión de género, nivel de experiencia, educación, nivel socioeconómico, nacionalidad, apariencia personal, raza, casta, color, religión, o identidad y orientación sexual.
+We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, caste, color, religion, or sexual identity and orientation.
 
-Nos comprometemos a actuar e interactuar de maneras que contribuyan a una comunidad abierta, acogedora, diversa, inclusiva y saludable.
+We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
 
-## Nuestros Estándares
+## Our Standards
 
-Ejemplos de comportamiento que contribuyen a un ambiente positivo para nuestra comunidad incluyen:
+Examples of behavior that contributes to a positive environment for our community include:
 
-* Demostrar empatía y amabilidad ante otros.
-* Respetar las opiniones, puntos de vista y experiencias diferentes.
-* Dar y aceptar adecuadamente retroalimentación constructiva.
-* Aceptar la responsabilidad y disculparse ante quienes hayamos afectado por nuestros errores, aprendiendo de la experiencia.
-* Enfocarse en lo que es mejor no sólo para nosotros como individuos, sino para la comunidad en general.
+* Demonstrating empathy and kindness toward others
+* Being respectful of differing opinions, viewpoints, and experiences
+* Giving and gracefully accepting constructive feedback
+* Accepting responsibility and apologizing to those affected by our mistakes, and learning from the experience
+* Focusing on what is best not just for us as individuals, but for the overall community
 
-Ejemplos de comportamiento inaceptable incluyen:
+Examples of unacceptable behavior include:
 
-* El uso de lenguaje o imágenes sexualizadas, y atención o avances sexuales de cualquier tipo.
-* Troleo, comentarios insultantes o despectivos, y ataques personales o políticos.
-* El acoso público o privado.
-* La publicación de información privada de otros sin su permiso explícito, como, por ejemplo, una dirección física o electrónica.
-* Cualquier otra conducta que pudiera ser razonablemente considerada inapropiada en un entorno profesional.
+* The use of sexualized language or imagery, and sexual attention or advances of any kind
+* Trolling, insulting or derogatory comments, and personal or political attacks
+* Public or private harassment
+* Publishing others' private information, such as a physical or email address, without their explicit permission
+* Other conduct which could reasonably be considered inappropriate in a professional setting
 
-## Aplicación de Responsabilidades
+## Enforcement Responsibilities
 
-Los administradores de la comunidad son responsables de aclarar y hacer cumplir nuestros estándares de comportamiento aceptable y tomarán acciones apropiadas y correctivas de forma justa en respuesta a cualquier comportamiento que consideren inapropiado, amenazante, ofensivo o dañino.
+Community leaders are responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.
 
-Los administradores de la comunidad tienen el derecho y la responsabilidad de eliminar, editar o rechazar comentarios, commits, código, ediciones de wiki, issues y otras contribuciones que no se alineen con este Código de Conducta, y comunicarán las razones para sus decisiones de moderación cuando sea apropiado.
+Community leaders have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, and will communicate reasons for moderation decisions when appropriate.
 
-## Alcance
+## Scope
 
-Este código de conducta aplica tanto a espacios del proyecto como a espacios públicos donde un individuo esté en representación del proyecto o de su comunidad.
+This code of conduct applies within all community spaces, and also applies when an individual is officially representing the community in public spaces.
 
-## Atribución
+## Attribution
 
-Este Código de Conducta es una adaptación del [Contributor Covenant][homepage], versión 2.1, disponible en [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v2.1].
+This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 2.1, available at [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v2.1].
 
 [homepage]: https://www.contributor-covenant.org
 [v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html

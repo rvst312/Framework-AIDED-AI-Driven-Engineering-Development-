@@ -1,39 +1,39 @@
-# Contribuyendo al Framework AIDED
+# Contributing to the AIDED Framework
 
-¡Gracias por tu interés en contribuir a AIDED! Las contribuciones de la comunidad son esenciales para mantener este framework actualizado y útil para todos.
+Thank you for your interest in contributing to AIDED! Community contributions are essential to keep this framework updated and useful for everyone.
 
-## ¿Cómo puedo contribuir?
+## How can I contribute?
 
-### 1. Reportando Bugs
-Si encuentras un error o algo que no funciona como debería en la documentación o en las guías:
-- Busca en los [Issues](https://github.com/tu-usuario/AIDED/issues) existentes para ver si ya ha sido reportado.
-- Si no existe, crea un nuevo Issue describiendo el problema detalladamente.
+### 1. Reporting Bugs
+If you find an error or something that doesn't work as it should in the documentation or guides:
+- Search existing [Issues](https://github.com/tu-usuario/AIDED/issues) to see if it has already been reported.
+- If it doesn't exist, create a new Issue describing the problem in detail.
 
-### 2. Sugiriendo Mejoras
-Si tienes ideas para mejorar una fase del framework o añadir nuevas herramientas:
-- Abre un Issue con la etiqueta `enhancement`.
-- Describe tu propuesta y por qué sería beneficiosa para la comunidad.
+### 2. Suggesting Improvements
+If you have ideas to improve a framework phase or add new tools:
+- Open an Issue with the `enhancement` label.
+- Describe your proposal and why it would be beneficial for the community.
 
-### 3. Enviando Pull Requests (PRs)
-1. Haz un **Fork** del repositorio.
-2. Crea una nueva rama (`git checkout -b feature/mejora-increible`).
-3. Realiza tus cambios. Asegúrate de seguir el estilo de documentación existente.
-4. Haz **Commit** de tus cambios (`git commit -m 'feat: Añadir nueva guía para Fase X'`).
-5. Haz **Push** a la rama (`git push origin feature/mejora-increible`).
-6. Abre un **Pull Request**.
+### 3. Submitting Pull Requests (PRs)
+1. **Fork** the repository.
+2. Create a new branch (`git checkout -b feature/amazing-improvement`).
+3. Make your changes. Ensure you follow the existing documentation style.
+4. **Commit** your changes (`git commit -m 'feat: Add new guide for Phase X'`).
+5. **Push** to the branch (`git push origin feature/amazing-improvement`).
+6. Open a **Pull Request**.
 
-## Estilo de Documentación
+## Documentation Style
 
-- Usa Markdown estándar.
-- Mantén un tono profesional pero accesible.
-- Si añades diagramas, usa [Mermaid](https://mermaid.js.org/).
-- Verifica la ortografía y gramática.
+- Use standard Markdown.
+- Maintain a professional but accessible tone.
+- If you add diagrams, use [Mermaid](https://mermaid.js.org/).
+- Check spelling and grammar.
 
-## Desarrollo del Sitio de Documentación (`aided-docs`)
+## Documentation Site Development (`aided-docs`)
 
-Si estás contribuyendo al sitio web de la documentación:
-1. Navega al directorio: `cd aided-docs`
-2. Instala dependencias: `pnpm install`
-3. Ejecuta el servidor de desarrollo: `pnpm dev`
+If you are contributing to the documentation website:
+1. Navigate to the directory: `cd aided-docs`
+2. Install dependencies: `pnpm install`
+3. Run the development server: `pnpm dev`
 
-¡Esperamos tus contribuciones!
+We look forward to your contributions!
