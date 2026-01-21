@@ -166,6 +166,7 @@ function NavItem({ item, isActive }: { item: NavigationItem; isActive: boolean }
     <Link
       href={item.href}
       target={item.external ? "_blank" : undefined}
+      rel={item.external ? "noopener noreferrer" : undefined}
       className={cn(
         "flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors duration-200",
         isActive

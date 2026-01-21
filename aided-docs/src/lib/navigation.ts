@@ -34,7 +34,7 @@ export const getPrimaryNavigation = (lang: string = 'es'): NavigationItem[] => {
     },
     {
       title: "GitHub",
-      href: "https://github.com",
+      href: "https://github.com/rvst312/Framework-AIDED-AI-Driven-Engineering-Development-",
       icon: Github,
       external: true
     }
