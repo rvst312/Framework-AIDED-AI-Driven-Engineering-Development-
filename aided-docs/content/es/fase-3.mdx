@@ -1,0 +1,141 @@
+---
+title: Fase 3 - Frontend
+description: Configurar el proyecto frontend con las mejores prácticas y conectarlo a los servicios backend.
+---
+
+### **FASE 3: Inicialización del Proyecto Frontend**
+
+**Objetivo**: Configurar el proyecto frontend con las mejores prácticas y conectarlo a los servicios backend.
+
+#### **Configuración del Proyecto Next.js**
+
+**Paso 1: Creación del Proyecto**
+
+```bash
+# Usar template oficial de Supabase
+npx create-next-app -e with-supabase nombre-proyecto
+
+# O instalación manual
+npx create-next-app@latest nombre-proyecto
+cd nombre-proyecto
+npm install @supabase/supabase-js @supabase/auth-helpers-nextjs
+```
+
+**Paso 2: Estructura de Carpetas Recomendada**
+
+```
+src/
+├── app/                    # App Router de Next.js
+│   ├── (auth)/            # Rutas de autenticación
+│   ├── (dashboard)/       # Rutas protegidas
+│   └── api/               # API Routes
+├── components/
+│   ├── ui/                # Componentes base (buttons, inputs, etc.)
+│   ├── features/          # Componentes por funcionalidad
+│   └── layouts/           # Layouts reutilizables
+├── lib/
+│   ├── supabase/          # Cliente y utilidades de Supabase
+│   ├── utils/             # Funciones auxiliares
+│   └── hooks/             # Custom React hooks
+├── types/
+│   └── supabase.ts        # Tipos generados desde DB
+└── styles/
+    └── globals.css        # Estilos globales
+```
+
+**Paso 3: Configuración de Variables de Entorno**
+
+```
+# .env.local
+NEXT_PUBLIC_SUPABASE_URL=tu_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
+SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+
+# Otras variables
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NODE_ENV=development
+```
+
+**Paso 4: Configuración del Cliente Supabase**
+
+```ts
+// lib/supabase/client.ts
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Database } from '@/types/supabase'
+
+export const createClient = () => createClientComponentClient<Database>()
+```
+
+**Paso 5: Generación de Tipos TypeScript**
+
+```bash
+# Generar tipos desde tu schema de Supabase
+npx supabase gen types typescript --project-id "tu-project-id" > types/supabase.ts
+```
+
+#### **Control de Versiones**
+
+**Inicialización de Git**
+
+```bash
+git init
+git add .
+git commit -m "Initial commit: Next.js + Supabase setup"
+```
+
+**Configuración de .gitignore**
+
+```
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment
+.env*.local
+.env.production
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Testing
+coverage/
+
+# Misc
+.DS_Store
+*.log
+```
+
+**Conexión con GitHub**
+
+```bash
+gh repo create nombre-proyecto --private --source=. --remote=origin
+git branch -M main
+git push -u origin main
+```
+
+#### Despliegue Inicial (Opcional)
+
+**Vercel**
+1. Conectar repositorio de GitHub a Vercel
+2. Configurar variables de entorno en dashboard de Vercel
+3. Establecer configuraciones de build:
+   - Framework Preset: Next.js
+   - Build Command: `npm run build`
+   - Output Directory: `.next`
+4. Desplegar rama `main` para producción
+5. Configurar rama `dev` para staging
+
+#### Validación de Configuración
+
+**Checklist de Validación:**
+- [ ] El proyecto arranca correctamente (`npm run dev`)
+- [ ] La conexión a Supabase funciona
+- [ ] Las variables de entorno están configuradas
+- [ ] Los tipos TypeScript están generados
+- [ ] El repositorio Git está configurado
+- [ ] El .gitignore excluye archivos sensibles
+- [ ] (Opcional) El despliegue en Vercel es exitoso

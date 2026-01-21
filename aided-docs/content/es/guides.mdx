@@ -1,0 +1,50 @@
+---
+title: Guides
+description: Testing, Deployment, and AI Agent Guidelines.
+---
+
+# FASE 6: Testing, CI/CD y Despliegue
+
+> **Objetivo**: Establecer pipeline de despliegue automatizado con calidad garantizada.
+
+## Configuración de Testing
+1.  **Unit Testing con Jest**: Componentes críticos y utilidades.
+2.  **Integration Testing**: Flujos de autenticación y formularios.
+3.  **E2E Testing con Playwright (Opcional)**: Flujos completos de usuario.
+
+## Configuración de CI/CD
+1.  **GitHub Actions**: Pipeline de `CI` (test, lint, build) y `Deploy to Staging`.
+2.  **Husky**: Git hooks para pre-commit (lint-staged).
+
+## Estrategia de Despliegue
+**Vercel (Recomendado)**
+*   **Production**: Rama `main` -> `app.tudominio.com`.
+*   **Preview**: Rama `dev` -> `staging.tudominio.com`.
+
+---
+
+# Guía para Agentes de IA
+
+## Cuando desarrolles nuevas features:
+1.  **Consulta AGENTS.md** para entender el contexto.
+2.  **Revisa el schema de BD** antes de escribir queries.
+3.  **Sigue los patrones establecidos** (Server Components, etc.).
+4.  **Respeta las convenciones** de naming y estructura.
+5.  **Valida RLS** para operaciones de base de datos.
+6.  **Incluye manejo de errores** y loading states.
+7.  **Piensa en mobile-first**.
+
+## Checklist antes de completar una tarea:
+- [ ] Código sigue convenciones.
+- [ ] Tipos TypeScript correctos.
+- [ ] RLS considerado.
+- [ ] Responsive design implementado.
+- [ ] Accesibilidad validada.
+- [ ] Sin console.logs.
+
+---
+
+# Recursos y Enlaces
+
+*   **Documentación**: [Next.js](https://nextjs.org/docs), [Supabase](https://supabase.com/docs), [Tailwind CSS](https://tailwindcss.com/docs).
+*   **Herramientas**: ChatGPT/Claude, Trae/Cursor, ClickUp, Figma, v0.dev.

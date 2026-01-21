@@ -1,0 +1,38 @@
+---
+title: Phase 6 - Testing & CI/CD
+description: Establish automated deployment pipeline with guaranteed quality.
+---
+
+### **PHASE 6: Testing, CI/CD and Deployment**
+
+**Objective**: Establish automated deployment pipeline with guaranteed quality.
+
+#### **Testing Configuration**
+1. **Unit Testing with Jest**: Critical components and utilities.
+2. **Integration Testing**: Authentication flows and forms.
+3. **E2E Testing with Playwright (Optional)**: Complete user flows.
+
+#### **CI/CD Configuration**
+1. **GitHub Actions**: `CI` pipeline (test, lint, build) and `Deploy to Staging`.
+2. **Husky**: Git hooks for pre-commit (lint-staged).
+3. **Scripts**: `npm run test:ci`, `npm run format`.
+
+#### **Deployment Strategy**
+**Vercel (Recommended)**
+* **Production**: `main` branch -> `app.yourdomain.com`.
+* **Preview**: `dev` branch -> `staging.yourdomain.com`.
+
+**Alternative: VPS with Docker**
+Use `Dockerfile` and `docker-compose.yml` for self-contained deployment.
+
+#### **Monitoring and Logging**
+* **Sentry**: Error tracking.
+* **Vercel Analytics**: User metrics.
+* **Supabase Logs**: Database and Auth.
+
+#### **Deployment Checklist**
+- [ ] Tests pass locally.
+- [ ] Build successful.
+- [ ] Environment variables in production.
+- [ ] Migrations applied.
+- [ ] Smoke tests in production.

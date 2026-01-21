@@ -1,0 +1,33 @@
+---
+title: Security Best Practices
+description: Guidelines for securing your application and data.
+---
+
+# Mejores Prácticas de Seguridad
+
+La seguridad es fundamental en el framework AIDED. Sigue estas guías para proteger tu aplicación.
+
+## Autenticación y Autorización
+
+### Row Level Security (RLS)
+Nunca deshabilites RLS en producción. Asegúrate de que cada tabla tenga políticas claras:
+- `SELECT`: ¿Quién puede ver estos datos?
+- `INSERT`: ¿Quién puede crear nuevos registros?
+- `UPDATE`: ¿Quién puede modificar registros existentes?
+- `DELETE`: ¿Quién puede eliminar registros?
+
+### Gestión de Secretos
+- Nunca comitees archivos `.env` al repositorio.
+- Usa variables de entorno para claves de API y credenciales.
+- Rota tus claves de servicio periódicamente.
+
+## Protección de Datos
+
+### Validación de Entradas
+Nunca confíes en los datos del cliente. Valida todas las entradas en el backend, incluso si ya las validaste en el frontend.
+
+### HTTPS
+Asegúrate de que todas las comunicaciones se realicen sobre HTTPS. HSTS está habilitado por defecto en nuestros despliegues recomendados.
+
+## Auditoría
+Implementa logs de auditoría para operaciones críticas. Debes saber quién hizo qué y cuándo.

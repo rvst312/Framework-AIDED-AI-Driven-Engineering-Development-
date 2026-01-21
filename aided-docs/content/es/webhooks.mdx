@@ -1,0 +1,29 @@
+---
+title: Webhooks
+description: Real-time event notifications for your application.
+---
+
+# Webhooks
+
+Los webhooks permiten que tu aplicación reciba notificaciones en tiempo real cuando ocurren eventos específicos en el sistema.
+
+## Configuración de Webhooks
+
+Para configurar un webhook:
+
+1. Ve a la configuración de tu proyecto
+2. Selecciona la sección "Webhooks"
+3. Haz clic en "Añadir Endpoint"
+4. Ingresa la URL donde recibirás las notificaciones
+
+## Eventos Disponibles
+
+| Evento | Descripción |
+| :--- | :--- |
+| `user.created` | Se dispara cuando un nuevo usuario se registra |
+| `user.updated` | Se dispara cuando un usuario actualiza su perfil |
+| `payment.succeeded` | Se dispara cuando un pago es procesado exitosamente |
+
+## Validación de Firmas
+
+Para asegurar que las peticiones provienen de nuestro sistema, incluimos una firma en el header `X-Signature`. Debes validar esta firma usando tu clave secreta.

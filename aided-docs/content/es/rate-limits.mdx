@@ -1,0 +1,30 @@
+---
+title: Rate Limits
+description: Understanding API usage limits and quotas.
+---
+
+# Rate Limits
+
+Para asegurar la estabilidad y disponibilidad de la plataforma para todos los usuarios, aplicamos límites de tasa a nuestra API.
+
+## Límites Generales
+
+| Plan | Requests por Minuto | Requests por Hora |
+| :--- | :--- | :--- |
+| **Free** | 60 | 1,000 |
+| **Pro** | 300 | 10,000 |
+| **Enterprise** | Personalizado | Personalizado |
+
+## Headers de Respuesta
+
+Cada respuesta de la API incluye headers que te informan sobre tu estado actual:
+
+- `X-RateLimit-Limit`: El número máximo de peticiones permitidas en el periodo actual.
+- `X-RateLimit-Remaining`: El número de peticiones que te quedan en el periodo actual.
+- `X-RateLimit-Reset`: El tiempo (en segundos epoch) cuando se reiniciará el límite.
+
+## Qué hacer si excedes el límite
+
+Si excedes el límite, recibirás una respuesta con código `429 Too Many Requests`. Debes esperar hasta el tiempo indicado en `X-RateLimit-Reset` antes de realizar nuevas peticiones.
+
+Recomendamos implementar "exponential backoff" en tus clientes API para manejar estos casos elegantemente.

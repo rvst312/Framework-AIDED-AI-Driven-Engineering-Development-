@@ -1,0 +1,66 @@
+---
+title: Fase 2 - Backend
+description: Implementar la infraestructura de datos siguiendo el diseño documentado.
+---
+
+### **FASE 2: Configuración de Backend y Base de Datos**
+
+**Objetivo**: Implementar la infraestructura de datos siguiendo el diseño documentado.
+
+#### **Configuración de Supabase**
+
+**Paso 1: Inicialización del Proyecto**
+
+1. Crear cuenta en [Supabase](https://supabase.com)  
+2. Crear nuevo proyecto con:  
+   * Nombre descriptivo del proyecto  
+   * Región cercana a tus usuarios objetivo  
+   * Password de base de datos fuerte (almacenar en gestor de contraseñas)  
+   * Plan apropiado (Free tier para desarrollo inicial)
+
+**Paso 2: Implementación del Schema**
+
+1. Abrir SQL Editor en Supabase  
+2. Ejecutar scripts en orden:
+
+```sql
+   -- 1. Extensiones necesarias
+   CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+   
+   -- 2. Tablas principales (orden según dependencias)
+   -- 3. Índices
+   -- 4. Triggers
+   -- 5. Functions
+   -- 6. RLS Policies
+```
+
+3. Validar cada script antes de continuar  
+4. Documentar cualquier modificación respecto al diseño original
+
+**Paso 3: Configuración de Seguridad**
+
+* Habilitar Row Level Security en todas las tablas  
+* Implementar políticas RLS documentadas en ClickUp  
+* Configurar roles y permisos  
+* Establecer políticas de backup automático
+
+**Paso 4: Configuración de Autenticación**
+
+* Configurar providers de autenticación (Email, Google, GitHub, etc.)  
+* Personalizar emails de autenticación  
+* Configurar URLs de redirección  
+* Establecer políticas de contraseñas
+
+**Paso 5: Validación**
+
+* Probar conexiones desde SQL Editor  
+* Verificar que RLS funciona correctamente  
+* Insertar datos de prueba para validar relaciones  
+* Documentar credenciales y configuración en gestor seguro
+
+#### **Gestión de Migraciones**
+
+* Guardar todos los scripts SQL en repositorio Git  
+* Usar herramienta de migraciones (Supabase CLI o custom)  
+* Mantener versionado de cambios de schema  
+* Documentar cada migración con propósito y fecha

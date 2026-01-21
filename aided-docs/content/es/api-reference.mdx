@@ -1,0 +1,37 @@
+---
+title: API Reference
+description: Backend configuration, API design, and database schema.
+---
+
+# API Design
+
+*   Especificación de endpoints (estilo OpenAPI).
+*   Versionado de API (v1, v2, etc.).
+*   Autenticación y autorización.
+*   Schemas de request/response.
+*   Códigos de error y manejo.
+*   Rate limiting y throttling.
+*   Documentación de integración.
+
+## Configuración de Supabase
+
+### Implementación del Schema
+
+```sql
+-- 1. Extensiones necesarias
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- 2. Tablas principales (orden según dependencias)
+-- 3. Índices
+-- 4. Triggers
+-- 5. Functions
+-- 6. RLS Policies
+```
+
+### Configuración de Seguridad
+*   Habilitar Row Level Security en todas las tablas.
+*   Implementar políticas RLS documentadas.
+*   Configurar roles y permisos.
+
+### Edge Functions
+Usar **Edge Functions** de Supabase para lógica sensible, webhooks o tareas programadas.

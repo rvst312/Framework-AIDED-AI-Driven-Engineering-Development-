@@ -1,0 +1,443 @@
+---
+title: Fase 6 - Testing & CI/CD
+description: Establecer pipeline de despliegue automatizado con calidad garantizada.
+---
+
+### **FASE 6: Testing, CI/CD y Despliegue**
+
+**Objetivo**: Establecer pipeline de despliegue automatizado con calidad garantizada.
+
+#### **Configuración de Testing**
+
+**1. Unit Testing con Jest**
+
+**Instalación:**
+```bash
+npm install -D jest @testing-library/react @testing-library/jest-dom @testing-library/user-event jest-environment-jsdom
+```
+
+**Configuración (jest.config.js):**
+```javascript
+const nextJest = require('next/jest')
+
+const createJestConfig = nextJest({
+  dir: './',
+})
+
+const customJestConfig = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironment: 'jest-environment-jsdom',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/*.stories.tsx',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70,
+    },
+  },
+}
+
+module.exports = createJestConfig(customJestConfig)
+```
+
+**Ejemplo de Test:**
+```typescript
+// components/ui/Button.test.tsx
+
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { Button } from './Button'
+
+describe('Button', () => {
+  it('renders with correct text', () => {
+    render(<Button>Click me</Button>)
+    expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument()
+  })
+
+  it('calls onClick when clicked', async () => {
+    const handleClick = jest.fn()
+    render(<Button onClick={handleClick}>Click me</Button>)
+    
+    await userEvent.click(screen.getByRole('button'))
+    expect(handleClick).toHaveBeenCalledTimes(1)
+  })
+
+  it('is disabled when loading', () => {
+    render(<Button loading>Click me</Button>)
+    expect(screen.getByRole('button')).toBeDisabled()
+  })
+})
+```
+
+**2. Integration Testing**
+```typescript
+// app/(auth)/login/login.test.tsx
+
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import LoginPage from './page'
+import { signIn } from '@/lib/supabase/auth'
+
+jest.mock('@/lib/supabase/auth')
+
+describe('Login Page', () => {
+  it('submits form with correct credentials', async () => {
+    const mockSignIn = signIn as jest.MockedFunction<typeof signIn>
+    mockSignIn.mockResolvedValue({ data: { user: {} }, error: null })
+
+    render(<LoginPage />)
+
+    await userEvent.type(screen.getByLabelText(/email/i), 'test@example.com')
+    await userEvent.type(screen.getByLabelText(/password/i), 'password123')
+    await userEvent.click(screen.getByRole('button', { name: /sign in/i }))
+
+    await waitFor(() => {
+      expect(mockSignIn).toHaveBeenCalledWith('test@example.com', 'password123')
+    })
+  })
+})
+```
+
+**3. E2E Testing con Playwright (Opcional)**
+```bash
+npm install -D @playwright/test
+npx playwright install
+```
+```typescript
+// e2e/auth.spec.ts
+
+import { test, expect } from '@playwright/test'
+
+test('user can register and login', async ({ page }) => {
+  await page.goto('/register')
+  
+  await page.fill('input[name="email"]', 'newuser@example.com')
+  await page.fill('input[name="password"]', 'SecurePass123!')
+  await page.fill('input[name="fullName"]', 'Test User')
+  
+  await page.click('button[type="submit"]')
+  
+  await expect(page).toHaveURL('/dashboard')
+  await expect(page.locator('h1')).toContainText('Welcome')
+})
+```
+
+#### **Configuración de CI/CD**
+
+**1. GitHub Actions**
+
+**.github/workflows/ci.yml:**
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run linter
+        run: npm run lint
+      
+      - name: Run type check
+        run: npm run type-check
+      
+      - name: Run tests
+        run: npm run test:ci
+      
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli
+          lhci autorun
+```
+
+**.github/workflows/deploy-staging.yml:**
+```yaml
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+```
+
+**2. Husky para Git Hooks**
+```bash
+npm install -D husky lint-staged
+npx husky install
+```
+
+**.husky/pre-commit:**
+```bash
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged
+```
+
+**lint-staged.config.js:**
+```javascript
+module.exports = {
+  '*.{js,jsx,ts,tsx}': [
+    'eslint --fix',
+    'prettier --write',
+  ],
+  '*.{json,md,yml,yaml}': [
+    'prettier --write',
+  ],
+}
+```
+
+**3. Scripts en package.json**
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "test": "jest --watch",
+    "test:ci": "jest --ci --coverage",
+    "test:e2e": "playwright test",
+    "prepare": "husky install"
+  }
+}
+```
+
+#### **Estrategia de Despliegue**
+
+**1. Vercel (Recomendado)**
+
+**Configuración inicial:**
+1. Conectar repositorio GitHub a Vercel
+2. Configurar proyecto:
+   - **Framework Preset**: Next.js
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `.next`
+   - **Install Command**: `npm install`
+
+3. Configurar variables de entorno:
+```
+Production (main branch):
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_SUPABASE_ANON_KEY
+- SUPABASE_SERVICE_ROLE_KEY
+- NEXT_PUBLIC_APP_URL
+
+Preview (dev branch):
+- NEXT_PUBLIC_SUPABASE_URL (staging)
+- NEXT_PUBLIC_SUPABASE_ANON_KEY (staging)
+- SUPABASE_SERVICE_ROLE_KEY (staging)
+- NEXT_PUBLIC_APP_URL
+```
+
+4. Configurar dominios:
+   - **Production**: `app.tudominio.com` → rama `main`
+   - **Staging**: `staging.tudominio.com` → rama `dev`
+
+**vercel.json (opcional):**
+```json
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**2. Alternativa: VPS con Docker**
+
+**Dockerfile:**
+```dockerfile
+FROM node:18-alpine AS base
+
+FROM base AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
+CMD ["node", "server.js"]
+```
+
+**docker-compose.yml:**
+```yaml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.production
+    restart: unless-stopped
+```
+
+**Despliegue:**
+```bash
+# En el servidor
+git pull origin main
+docker-compose down
+docker-compose up -d --build
+```
+
+#### **Monitoreo y Logging**
+
+**1. Sentry para Error Tracking**
+```bash
+npm install @sentry/nextjs
+npx @sentry/wizard -i nextjs
+```
+
+**sentry.client.config.ts:**
+```typescript
+import * as Sentry from '@sentry/nextjs'
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  tracesSampleRate: 1.0,
+  environment: process.env.NODE_ENV,
+})
+```
+
+**2. Vercel Analytics**
+```bash
+npm install @vercel/analytics
+```
+```typescript
+// app/layout.tsx
+import { Analytics } from '@vercel/analytics/react'
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  )
+}
+```
+
+**3. Supabase Logs**
+
+Monitorear en Dashboard de Supabase:
+- Database logs
+- API logs
+- Auth logs
+- Realtime logs
+
+#### **Checklist de Despliegue**
+
+**Pre-Despliegue:**
+- [ ] Tests pasan localmente
+- [ ] Build exitoso sin warnings
+- [ ] Variables de entorno configuradas
+- [ ] Migraciones de BD aplicadas
+- [ ] AGENTS.md actualizado
+- [ ] CHANGELOG.md actualizado
+- [ ] ClickUp sincronizado con estado actual
+
+**Post-Despliegue:**
+- [ ] Smoke tests en producción
+- [ ] Verificar analytics
+- [ ] Monitorear logs por errores
+- [ ] Verificar performance (Lighthouse)
+- [ ] Backup de base de datos
+- [ ] Comunicar release al equipo/usuarios

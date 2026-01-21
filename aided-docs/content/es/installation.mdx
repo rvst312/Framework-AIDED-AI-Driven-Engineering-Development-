@@ -1,0 +1,95 @@
+---
+title: Installation & Setup
+description: Setting up the project environment, backend, and frontend.
+---
+
+# FASE 1: Preparación del Proyecto en Sistema de Gestión
+
+> **Objetivo**: Centralizar toda la documentación en un sistema de gestión de proyectos que sirva como fuente única de verdad.
+
+## Configuración en ClickUp (o similar)
+
+**Estructura de Espacios Recomendada:**
+
+```text
+📁 [Nombre del Proyecto]
+  ├── 📋 Infraestructura
+  ├── 📋 Requisitos Funcionales
+  ├── 📋 Diseño de Base de Datos
+  ├── 📋 API Design
+  ├── 📋 UX/UI
+  └── 📋 Prompts y Recursos de Desarrollo
+```
+
+---
+
+# FASE 2: Configuración de Backend y Base de Datos
+
+> **Objetivo**: Implementar la infraestructura de datos siguiendo el diseño documentado.
+
+## Configuración de Supabase
+
+**Paso 1: Inicialización del Proyecto**
+1.  Crear cuenta en [Supabase](https://supabase.com).
+2.  Crear nuevo proyecto con:
+    *   Nombre descriptivo del proyecto.
+    *   Región cercana a tus usuarios objetivo.
+    *   Password de base de datos fuerte (almacenar en gestor de contraseñas).
+    *   Plan apropiado (Free tier para desarrollo inicial).
+
+**Paso 2: Implementación del Schema**
+1.  Abrir SQL Editor en Supabase.
+2.  Ejecutar scripts en orden:
+
+```sql
+-- 1. Extensiones necesarias
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- 2. Tablas principales (orden según dependencias)
+-- 3. Índices
+-- 4. Triggers
+-- 5. Functions
+-- 6. RLS Policies
+```
+
+---
+
+# FASE 3: Inicialización del Proyecto Frontend
+
+> **Objetivo**: Configurar el proyecto frontend con las mejores prácticas y conectarlo a los servicios backend.
+
+## Configuración del Proyecto Next.js
+
+**Paso 1: Creación del Proyecto**
+
+```bash
+# Usar template oficial de Supabase
+npx create-next-app -e with-supabase nombre-proyecto
+
+# O instalación manual
+npx create-next-app@latest nombre-proyecto
+cd nombre-proyecto
+npm install @supabase/supabase-js @supabase/auth-helpers-nextjs
+```
+
+**Paso 2: Estructura de Carpetas Recomendada**
+
+```text
+src/
+├── app/                    # App Router de Next.js
+│   ├── (auth)/            # Rutas de autenticación
+│   ├── (dashboard)/       # Rutas protegidas
+│   └── api/               # API Routes
+├── components/
+│   ├── ui/                # Componentes base (buttons, inputs, etc.)
+│   ├── features/          # Componentes por funcionalidad
+│   └── layouts/           # Layouts reutilizables
+├── lib/
+│   ├── supabase/          # Cliente y utilidades de Supabase
+│   ├── utils/             # Funciones auxiliares
+│   └── hooks/             # Custom React hooks
+├── types/
+│   └── supabase.ts        # Tipos generados desde DB
+└── styles/
+    └── globals.css        # Estilos globales
+```
