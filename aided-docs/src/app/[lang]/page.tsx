@@ -38,6 +38,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         ? "AI-Driven Development Methodology"
         : "Metodología de Desarrollo Asistido por IA",
       locale: isEn ? "en_US" : "es_ES",
+      images: [
+        {
+          url: "/images/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "AIDED Framework",
+        },
+      ],
     },
   };
 }
