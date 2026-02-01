@@ -7,7 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aided.framework"), // Reemplazar con tu dominio real
+  metadataBase: new URL("https://aided.site"),
   title: {
     default: "AIDED Framework",
     template: "%s | AIDED Framework",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AIDED Framework",
     description: "AI-Driven Engineering Development Framework. Guías, procesos y tutoriales para el desarrollo asistido por IA.",
-    url: "https://aided.framework",
+    url: "https://aided.site",
     siteName: "AIDED Framework",
     locale: "es_ES",
     type: "website",
