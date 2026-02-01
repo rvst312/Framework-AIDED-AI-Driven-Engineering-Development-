@@ -20,11 +20,20 @@ export const metadata: Metadata = {
     siteName: "AIDED Framework",
     locale: "es_ES",
     type: "website",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "AIDED Framework",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AIDED Framework",
     description: "AI-Driven Engineering Development Framework",
+    images: ["/images/og-image.png"],
   },
   robots: {
     index: true,
